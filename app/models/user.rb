@@ -14,5 +14,7 @@ class User < ApplicationRecord
 
   #パスワード、has_secure_passwordにはデフォルトで長さとかが入っていない。
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }
+
+  # 編集時にパスワードは空でも良い。ログイン時はだめ。
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 end
