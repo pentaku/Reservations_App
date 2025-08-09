@@ -13,11 +13,17 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+    # @log_in @user ユーザー作成完了したら、ログインさせる。
       flash[:success] = "Welcome !"
       redirect_to @user #Get "/users/#{@user.id}"
     else
       render 'new'
     end
+  end
+
+  # GET /users/:id/edit
+  def edit
+    @user = User.find(params[:id])
   end
 
 
