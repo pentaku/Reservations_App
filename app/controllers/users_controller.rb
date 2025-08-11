@@ -28,6 +28,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  #PATCH /users/:id
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
@@ -51,6 +52,7 @@ class UsersController < ApplicationController
   # ログイン済みユーザーかどうか確認
   def logged_in_user
     unless logged_in?
+      store_location #どこかのページに遷移したい。セッション切れていた時に行きたいところを覚えておく
       flash[:danger] = "Please log in."
       redirect_to login_url
     end
@@ -60,7 +62,7 @@ class UsersController < ApplicationController
   def correct_user
     @user = User.find(params[:id])
     # ログインしていないと、current_userが呼び出せない。
-    redirect_to(root_url) unless @user == current_user
+    redirect_to(root_url) unless @user == current_user?(@user)
   end
 
 end
