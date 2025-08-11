@@ -2,7 +2,6 @@ class User < ApplicationRecord
 
   # 大文字と小文字の区別を無くす。（E-mailを小文字に直してからバリデーションをかける）
   before_save { self.email = email.downcase }
-
   # ユーザー名
   validates :name, presence: true, length: { maximum: 30 } #ユーザー名は必須、30文字以内
 
@@ -15,6 +14,7 @@ class User < ApplicationRecord
   #パスワード、has_secure_passwordにはデフォルトで長さとかが入っていない。
   has_secure_password
 
-  # 編集時にパスワードは空でも良い。ログイン時はだめ。
+  # 編集時にパスワードは空でも良い。
+  # パスワードが存在するときに限って、passwordが空でも編集可能。
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 end
