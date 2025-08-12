@@ -46,12 +46,36 @@ class UsersController < ApplicationController
   def destroy
   end
 
+  # パスワード更新フォームの表示
+  def edit_password
+    # パスワード更新フォームを表示
+    @user = User.find(params[:id])
+  end
+
+  # パスワードの更新
+  def update_password
+    if params[:user][:password].empty?
+      @user.errors.add(:password, :blank)
+      render 'edit'
+    elsif @user.update(user_password_params)
+      log_in @user
+      flash[:success] = "パスワードが更新されました"
+      redirect_to @user
+    else
+      render 'edit'
+    end
+  end
+
 
   # =============================================================
   private
   def user_params
     params.require(:user).permit(:name, :email, :password,
                                 :password_confirmation)
+  end
+
+  def user_password_params
+    params.require(:user).permit(:current_password, :password, :password_confirmation)
   end
 
   # beforeアクション
