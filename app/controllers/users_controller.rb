@@ -56,13 +56,13 @@ class UsersController < ApplicationController
   def update_password
     if params[:user][:password].empty?
       @user.errors.add(:password, :blank)
-      render 'edit'
+      render 'edit_password'
     elsif @user.update(user_password_params)
       log_in @user
       flash[:success] = "パスワードが更新されました"
       redirect_to @user
     else
-      render 'edit'
+      render 'edit_password'
     end
   end
 

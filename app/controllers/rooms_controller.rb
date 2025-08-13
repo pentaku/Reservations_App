@@ -19,4 +19,9 @@ class RoomsController < ApplicationController
 
   def destroy
   end
+
+  # def own
+  #   @rooms = current_user.rooms # 現在のユーザーの部屋を取得
+  # end
+
 end
