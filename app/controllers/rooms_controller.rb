@@ -1,5 +1,7 @@
 class RoomsController < ApplicationController
-  before_action :logged_in_user, only: [:create, :destroy]
+  before_action :logged_in_user, only: [:create, :update :destroy]
+  before_action :correct_user, only: [:destroy]
+
 
   def index
     # @Rooms = Room.all
@@ -28,17 +30,27 @@ class RoomsController < ApplicationController
   end
 
   def destroy
+    @room.destroy
+    flash[:success] = "Room deleted"
+    # リクエスト送ったページにリダイレクトする。
+    redirect_to request.referrer || root_url
   end
 
   # 登録した施設一覧ページ
-  # def own
-  #   @rooms = current_user.rooms # 現在のユーザーの部屋を取得
-  # end
+  def own
+    @rooms = current_user.rooms # 現在のユーザーの部屋を取得
+  end
 
 
   private
   def room_params
     params.require(:room).permit(:description, :price)
+  end
+
+  def correct_user
+    # カレントユーザーの部屋コレクションを取得して、検索をかける
+    @room = current_user.rooms.find_by(id: params[:id])
+    redirect_to(root_url) if @room.nil?
   end
 
 

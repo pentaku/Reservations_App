@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get  '/signup',  to: 'users#new'
 
   # roomsコントローラ
+  get 'rooms/own', to:'rooms#own'
   resources :rooms
 
   # Sessionコントローラ
@@ -11,8 +12,8 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
 
   # usersコントローラ
-  resources :users
   get 'users/:id/edit_password', to: 'users#edit_password'
   patch '/update_password', to: 'users#update_password'
+  resources :users
 end
 
