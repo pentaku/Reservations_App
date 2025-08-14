@@ -1,17 +1,16 @@
 Rails.application.routes.draw do
-  get 'rooms/index'
-  get 'rooms/show'
-  get 'rooms/new'
-  get 'rooms/create'
-  get 'rooms/edit'
-  get 'rooms/update'
-  get 'rooms/destroy'
-  get 'sessions/new'
   root to: 'static_pages#home'
   get  '/signup',  to: 'users#new'
+
+  # roomsコントローラ
+  resources :rooms
+
+  # Sessionコントローラ
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
+
+  # usersコントローラ
   resources :users
   get 'users/:id/edit_password', to: 'users#edit_password'
   patch '/update_password', to: 'users#update_password'

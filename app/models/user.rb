@@ -19,4 +19,11 @@ class User < ApplicationRecord
   # 編集時にパスワードは空でも良い。
   # パスワードが存在するときに限って、passwordが空でも編集可能。
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+
+  # ユーザーモデルに記載する方がユーザー観点の方が記述しやすい。
+  # 自分の作成した部屋を全て抽出する。
+  def my_room
+    Room.where("user_id = ?", id)
+  end
+
 end

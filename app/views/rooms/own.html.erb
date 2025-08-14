@@ -7,3 +7,11 @@
   #     <%= will_paginate @microposts %>
   #   <% end %>
   # </div>
+
+# 以下のメソッドをuser.rbに記載しえているから使用する
+
+  # ユーザーモデルに記載する方がユーザー観点の方が記述しやすい。
+  # 自分の作成した部屋を全て抽出する。
+  # def my_room
+  #   Room.where("user_id = ?", id)
+  # end
