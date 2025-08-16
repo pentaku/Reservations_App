@@ -1,15 +1,17 @@
 <div class="container-fluid mt-4">
   <div class="row">
     <!-- サイドメニュー -->
-    <div class="col-md-3">
+    <div class="col-md-3 top-margin">
       <ul class="list-group">
-        <li class="list-group-item">アカウント</li>
-        <li class="list-group-item active text-danger">プロフィール</li>
+        <li class="list-group-item">
+          <%= link_to 'アカウント', users_account_path, class: "sideList-item" %>
+        </li>
+        <li class="list-group-item active">プロフィール</li>
       </ul>
     </div>
 
     <!-- メインコンテンツ -->
-    <div class="col-md-9">
+    <div class="col-md-9 top-margin">
       <h4 class="mb-4">プロフィール</h4>
       <table class="table table-borderless align-middle">
         <tbody>
@@ -32,9 +34,10 @@
           </tr>
         </tbody>
       </table>
-      <a href="#" class="btn btn-link">
+      <%= link_to edit_user_path(current_user), class: "btn btn-link" do %>
         <i class="fas fa-edit"></i> 編集
-      </a>
+      <% end %>
+
     </div>
   </div>
 </div>

@@ -12,13 +12,12 @@
       <%= f.label :email %>
       <%= f.email_field :email, class: 'form-control' %>
 
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
-
-      <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
 
       <%= f.submit "Save changes", class: "btn btn-primary" %>
+
+      <!-- キャンセルボタンの追加 -->
+      <%= link_to 'キャンセル', users_profile_path, class: 'btn btn-outline-secondary ml-2' %>
+
     <% end %>
   </div>
 </div>

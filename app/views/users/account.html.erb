@@ -1,15 +1,17 @@
 <div class="container-fluid mt-4">
   <div class="row">
     <!-- サイドメニュー -->
-    <div class="col-md-3">
+    <div class="col-md-3 top-margin">
       <ul class="list-group">
         <li class="list-group-item active">アカウント</li>
-        <li class="list-group-item">プロフィール</li>
+        <li class="list-group-item">
+          <%= link_to 'プロフィール', users_profile_path, class: "sideList-item" %>
+        </li>
       </ul>
     </div>
 
     <!-- メインコンテンツ -->
-    <div class="col-md-9">
+    <div class="col-md-9 top-margin">
       <h4 class="mb-4">アカウント</h4>
       <table class="table table-borderless">
         <tbody>
@@ -23,9 +25,11 @@
           </tr>
         </tbody>
       </table>
-      <a href="#" class="btn btn-link">
+
+      <%= link_to edit_password_user_path(current_user), class: "btn btn-link" do %>
         <i class="fas fa-edit"></i> 編集
-      </a>
+      <% end %>
+
     </div>
   </div>
 </div>

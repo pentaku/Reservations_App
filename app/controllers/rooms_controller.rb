@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :logged_in_user, only: [:create, :update :destroy]
+  before_action :logged_in_user, only: [:create, :destroy]
   before_action :correct_user, only: [:destroy]
 
 
@@ -11,6 +11,7 @@ class RoomsController < ApplicationController
   end
 
   def new
+    @room = Room.new
   end
 
   def create

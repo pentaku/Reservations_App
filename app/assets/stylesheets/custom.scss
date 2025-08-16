@@ -32,26 +32,24 @@ textarea {
 /* headerの背景色 */
 .navbar-custom {
   background-color: #001f4d;
+  color: white; /* テキストの色を白に設定 */
   min-height: 70px;
   padding: 10px 15px;
 }
 
-.navbar-custom .navbar-brand {
-  color: white !important;
-  font-size: 1.75rem;
-  line-height: 50px;
+// .navbar-custom .navbar-nav > li > a,
+// .navbar-custom #logo,
+// .navbar-custom .dropdown-toggle {
+//   color: #fff !important;
+// }
+
+// headerの文字色
+.navbar-custom .navbar-nav > li > a,
+.navbar-custom #logo,
+.navbar-custom .navbar-nav > li > .dropdown-toggle {
+  color: #fff !important;
 }
 
-.navbar-custom .nav-link {
-  color: white !important;
-  line-height: 50px;
-  font-size: 1.1rem;
-}
-
-.navbar-custom .nav-link:hover,
-.navbar-custom .nav-link:focus {
-  color: #ddd !important;
-}
 
 
 /* typography */
@@ -100,3 +98,56 @@ input {
   }
 }
 
+// =================
+// header
+// ================
+
+//headerのロゴ大きさ
+.navbar-custom #logo {
+  font-size: 22px; /* ナビの文字(16px)より少し大きい */
+  font-weight: bold;
+}
+
+/* headerの右側の余白 */
+.headerList_login {
+  margin-right: 20px;
+}
+
+/* headerのメニューに線を引く */
+.dropdown-menu .divider {
+  height: 1px;
+  margin: 9px 0;
+  overflow: hidden;
+  background-color: #e5e5e5;
+}
+
+/* コンテンツの上部に余白を作る。 */
+
+div.top-margin,
+h1,top-margin {
+  margin-top: 50px;
+}
+
+/* アカウントとメールアドレスの間にグレーの線を引く */
+.account-info {
+  border-bottom: 1px solid #808080;
+  padding-bottom: 10px;
+}
+
+
+
+
+
+
+// =====================
+// ログイン/新規登録ページ
+// =====================
+
+// ==============================
+// アカウントページ・プロフィールページ
+// ==============================
+
+// サイドバーの文字色
+li.list-group-item {
+  color:#333;
+}

@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   # usersコントローラ
   get 'users/account', to: 'users#account'
   get 'users/profile', to: 'users#profile'
-  get 'users/:id/edit_password', to: 'users#edit_password'
+  # asオプションをつけるとedit_password_user_pathというパスヘルパーが生成され、
+  # どこからでも簡単に参照できるようになります。
+  get 'users/:id/edit_password', to: 'users#edit_password', as: 'edit_password_user'
   patch '/update_password', to: 'users#update_password'
   resources :users
 end
