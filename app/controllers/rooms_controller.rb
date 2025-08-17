@@ -24,11 +24,11 @@ class RoomsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  # def edit
+  # end
 
-  def update
-  end
+  # def update
+  # end
 
   def destroy
     @room.destroy
@@ -41,6 +41,7 @@ class RoomsController < ApplicationController
   def own
     @rooms = current_user.rooms # 現在のユーザーの部屋を取得
   end
+
 
 
   private
