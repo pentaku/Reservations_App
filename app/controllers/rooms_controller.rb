@@ -8,6 +8,7 @@ class RoomsController < ApplicationController
   end
 
   def show
+    @room = Room.find(params[:id])
   end
 
   def new
@@ -24,11 +25,12 @@ class RoomsController < ApplicationController
     end
   end
 
-  # def edit
-  # end
+  def edit
+    @room = Room.find(params[:id])
+  end
 
-  # def update
-  # end
+  def update
+  end
 
   def destroy
     @room.destroy

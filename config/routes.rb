@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get  '/signup',  to: 'users#new'
 
   # roomsコントローラ
-  get 'rooms/own', to:'rooms#own'
+  get 'rooms/own', to:'rooms#own', as: 'own_room'
   resources :rooms
 
   # Sessionコントローラ
