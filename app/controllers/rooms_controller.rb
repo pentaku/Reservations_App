@@ -4,7 +4,7 @@ class RoomsController < ApplicationController
 
 
   def index
-    # @Rooms = Room.all
+    @rooms = Room.all
   end
 
   def show
@@ -45,7 +45,7 @@ class RoomsController < ApplicationController
 
   private
   def room_params
-    params.require(:room).permit(:name, :description, :price)
+    params.require(:room).permit(:name, :description, :price, :address)
   end
 
   def correct_user

@@ -1,2 +1,27 @@
-<h1>Rooms#index</h1>
-<p>Find me in app/views/rooms/index.html.erb</p>
+<div class="container mt-4">
+  <h2 class= "top-margin">施設一覧</h2>
+  <div class="row">
+    <% @rooms.each do |room| %>
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-sm h-100">
+          <%# ActiveStorage 未実装なのでダミー画像を使用 %>
+          <img src="/assets/placeholder.png" class="card-img-top" alt="施設画像">
+
+          <div class="card-body">
+            <h5 class="card-title"><%= room.name %></h5>
+            <%# 星は仮固定 ★★★★☆ %>
+            <p class="text-warning mb-2">★★★★★</p>
+
+            <p class="card-text text-muted"><%= truncate(room.description, length: 60) %></p>
+
+            <p class="mb-1"><strong>料金:</strong> ¥<%= number_with_delimiter(room.price, delimiter: ",") %></p>
+            <p class="mb-1"><strong>住所:</strong> <%= room.address %></p>
+
+
+            <%= link_to "詳細を見る", room_path(room), class: "btn btn-sm btn-outline-primary" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
