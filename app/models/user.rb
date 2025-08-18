@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :reservations, dependent: :destroy
   has_many :rooms, dependent: :destroy #Userが消えたら登録した部屋が消える。
   # 1番新しい部屋登録をfirstで取得する。順序が変わり、一番上に新しい部屋登録がくる。
   default_scope -> { order(created_at: :desc) }

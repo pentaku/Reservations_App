@@ -1,1 +1,22 @@
-施設詳細ページ
+<h2 class="top-margin">予約する</h2>
+
+<%= form_with model: Reservation.new, url: confirm_reservations_path, method: :post, local: true do |f| %>
+  <div class="mb-3">
+    <%= f.label :check_in, "チェックイン日" %>
+    <%= f.date_field :check_in, min: Date.today %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :check_out, "チェックアウト日" %>
+    <%= f.date_field :check_out, min: Date.tomorrow %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :guests, "人数" %>
+    <%= f.number_field :guests, min: 1 %>
+  </div>
+
+  <%= f.hidden_field :room_id, value: @room.id %>
+
+  <%= f.submit "予約確認ページへ", class: "btn btn-primary" %>
+<% end %>

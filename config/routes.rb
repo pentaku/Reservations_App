@@ -2,6 +2,14 @@ Rails.application.routes.draw do
   root to: 'static_pages#home'
   get  '/signup',  to: 'users#new'
 
+
+  #reservationsコントローラ
+  resources :reservations, only: [:index, :show, :edit, :update, :destroy, :create] do
+    collection do #collectionはIDを含まないrouting
+      post :confirm  # 仮予約確認ページ用
+    end
+  end
+
   # roomsコントローラ
   get 'rooms/own', to:'rooms#own', as: 'own_room'
   resources :rooms
