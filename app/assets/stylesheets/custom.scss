@@ -109,6 +109,36 @@ input {
   font-weight: bold;
 }
 
+.navbar-custom #logo {
+  font-size: 22px;
+  font-weight: bold;
+  text-decoration: none;   /* 下線を消す */
+  cursor: pointer;         /* カーソルをポインターに */
+}
+
+/* hover時も下線を表示させない */
+.navbar-custom #logo:hover {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* ヘッダー内のリンク共通スタイル */
+.navbar-custom a {
+  text-decoration: none;  /* 下線を消す */
+  cursor: pointer;        /* ポインターに */
+}
+
+/* hover時も下線を表示させない */
+.navbar-custom a:hover {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* ドロップダウンメニュー内のリンク色を白ではなくデフォルトに戻したい場合 */
+.navbar-custom .dropdown-menu a {
+  color: #333 !important; /* 黒に戻す。必要に応じて調整 */
+}
+
 /* headerの右側の余白 */
 .headerList_login {
   margin-right: 20px;
@@ -150,4 +180,12 @@ input {
 // サイドバーの文字色
 li.list-group-item {
   color:#333;
+}
+
+// ==============================
+// 検索機能
+// ==============================
+
+.mb-3 {
+  text-align: left;
 }

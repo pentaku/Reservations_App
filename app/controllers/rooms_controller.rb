@@ -5,10 +5,17 @@ class RoomsController < ApplicationController
 
   def index
     @rooms = Room.all
+    apply_search_filters
+    @total_count = @rooms.count
   end
 
   def show
     @room = Room.find(params[:id])
+
+    # 検索フォームを出したい場合
+    @rooms = Room.all
+    apply_search_filters
+    @total_count = @rooms.count
   end
 
   def new
@@ -44,8 +51,6 @@ class RoomsController < ApplicationController
     @rooms = current_user.rooms # 現在のユーザーの部屋を取得
   end
 
-
-
   private
   def room_params
     params.require(:room).permit(:name, :description, :price, :address)
@@ -57,5 +62,14 @@ class RoomsController < ApplicationController
     redirect_to(root_url) if @room.nil?
   end
 
+  def apply_search_filters
+    if params[:area].present?
+      @rooms = @rooms.where("address LIKE ?", "%#{params[:area]}%")
+    end
 
+    if params[:keyword].present?
+      keyword = "%#{params[:keyword]}%"
+      @rooms = @rooms.where("name LIKE ? OR description LIKE ?", keyword, keyword)
+    end
+  end
 end

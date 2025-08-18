@@ -1,17 +1,23 @@
 class ReservationsController < ApplicationController
+  before_action :set_reservation, only: [:edit, :update, :destroy]
+
   def index
+    @reservations = Reservation.all
   end
 
   # 確認ページ
   def show
   end
 
-
-  def edit
+  def create
+    @reservation = current_user.reservations.new(reservation_params)
+    if @reservation.save
+      redirect_to reservations_path, notice: "予約が完了しました。"
+    else
+      render :confirm, status: :unprocessable_entity
+    end
   end
 
-  def destroy
-  end
 
   def confirm
     if params[:id].present?
@@ -33,16 +39,34 @@ class ReservationsController < ApplicationController
     end
   end
 
-  def create
-    @reservation = current_user.reservations.new(reservation_params)
-    if @reservation.save
-      redirect_to reservations_path, notice: "予約が完了しました。"
+  def edit
+    @room = @reservation.room
+  end
+
+  # ここが確定ボタンのPOST先
+  def update
+    if @reservation.update(reservation_params)
+      redirect_to reservations_path, notice: "予約が更新されました"
     else
-      render :confirm, status: :unprocessable_entity
+      flash.now[:alert] = @reservation.errors.full_messages.join(", ")
+      render :edit, status: :unprocessable_entity
     end
   end
 
+  def destroy
+    @reservation.destroy
+    flash[:success] = "Room deleted"
+    # リクエスト送ったページにリダイレクトする。
+    redirect_to request.referrer || root_url
+  end
+
+
   private
+
+  def set_reservation
+    @reservation = current_user.reservations.find(params[:id])
+  end
+
   def reservation_params
     params.require(:reservation).permit(:check_in, :check_out, :guests, :room_id)
   end

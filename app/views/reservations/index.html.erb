@@ -1,2 +1,50 @@
-<h1>Reservations#index</h1>
-<p>Find me in app/views/reservations/index.html.erb</p>
+<!-- app/views/reservations/index.html.erb -->
+<div class="container mt-5">
+  <h2 class="mb-4 top-margin">予約一覧</h2>
+
+  <table class="table table-striped align-middle">
+    <thead>
+      <tr>
+        <th>施設名</th>
+        <th>紹介文</th>
+        <th>合計料金</th>
+        <th>チェックイン</th>
+        <th>チェックアウト</th>
+        <th>予約確定日時</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @reservations.each do |reservation| %>
+        <tr>
+          <td>
+            <%= link_to reservation.room.name, room_path(reservation.room), class: "text-primary" %>
+          </td>
+          <td><%= reservation.room.description %></td>
+          <td>
+            <% nights = (reservation.check_out - reservation.check_in).to_i %>
+            <%= number_to_currency(reservation.room.price * nights * reservation.guests, unit: "¥", precision: 0) %>
+          </td>
+          <td><%= reservation.check_in.strftime("%Y/%m/%d") %></td>
+          <td><%= reservation.check_out.strftime("%Y/%m/%d") %></td>
+          <td><%= reservation.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+          <td class="text-right">
+            <!-- 3点メニュー -->
+            <div class="dropdown">
+              <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenu<%= reservation.id %>"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v"></i>
+              </button>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu<%= reservation.id %>">
+                <%= link_to "再予約", edit_reservation_path(reservation), class: "dropdown-item" %>
+                <%= link_to "削除", reservation_path(reservation), method: :delete,
+                            data: { confirm: "本当に削除しますか？" },
+                            class: "dropdown-item text-danger" %>
+              </div>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
