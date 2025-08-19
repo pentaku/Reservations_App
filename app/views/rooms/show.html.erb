@@ -1,7 +1,5 @@
-<h2 class="top-margin">予約する</h2>
-
   <!-- 検索フォーム -->
-  <%= form_with url: rooms_path, method: :get, local: true, class: "row g-3 mb-4" do |f| %>
+  <%= form_with url: rooms_path, method: :get, local: true, class: "row g-3 mb-4 top-margin" do |f| %>
     <div class="col-md-3">
       <%= f.label :area, "エリア検索", class: "form-label" %>
       <%= f.select :area, ["東京", "大阪", "京都", "札幌"], { include_blank: "選択してください" }, class: "form-select" %>
@@ -17,8 +15,8 @@
     </div>
   <% end %>
 
-  <!-- 件数表示 -->
-  <p class="mb-3">検索結果: <%= @total_count %> 件</p>
+
+<h2 class="top-margin">予約する</h2>
 
 <%= form_with model: Reservation.new, url: confirm_reservations_path, method: :post, local: true do |f| %>
   <div class="mb-3">

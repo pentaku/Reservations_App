@@ -4,18 +4,14 @@ class RoomsController < ApplicationController
 
 
   def index
-    @rooms = Room.all
-    apply_search_filters
-    @total_count = @rooms.count
+    @rooms, @total_count = search_rooms
   end
 
   def show
     @room = Room.find(params[:id])
 
     # 検索フォームを出したい場合
-    @rooms = Room.all
-    apply_search_filters
-    @total_count = @rooms.count
+    @rooms, @total_count = search_rooms
   end
 
   def new
@@ -62,14 +58,4 @@ class RoomsController < ApplicationController
     redirect_to(root_url) if @room.nil?
   end
 
-  def apply_search_filters
-    if params[:area].present?
-      @rooms = @rooms.where("address LIKE ?", "%#{params[:area]}%")
-    end
-
-    if params[:keyword].present?
-      keyword = "%#{params[:keyword]}%"
-      @rooms = @rooms.where("name LIKE ? OR description LIKE ?", keyword, keyword)
-    end
-  end
 end
