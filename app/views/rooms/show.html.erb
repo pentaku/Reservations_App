@@ -15,6 +15,10 @@
     </div>
   <% end %>
 
+  <div class="col-md-6">
+    <%= image_tag room.image, class: "img-fluid" if room.image.attached? %>
+  </div>
+
 
 <h2 class="top-margin">予約する</h2>
 

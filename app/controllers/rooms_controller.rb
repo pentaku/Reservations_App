@@ -20,6 +20,7 @@ class RoomsController < ApplicationController
 
   def create
     @room = current_user.rooms.build(room_params)
+    @room.image.attach(params[:room][:image])
     if @room.save
       flash[:success] = "作成しました !"
       redirect_to @room #Get "/users/#{@user.id}"
@@ -49,7 +50,7 @@ class RoomsController < ApplicationController
 
   private
   def room_params
-    params.require(:room).permit(:name, :description, :price, :address)
+    params.require(:room).permit(:name, :description, :price, :address, :image)
   end
 
   def correct_user
