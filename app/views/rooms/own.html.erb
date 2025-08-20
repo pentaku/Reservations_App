@@ -15,6 +15,18 @@
     <tbody>
       <% @rooms.each do |room| %>
         <tr>
+
+          <td>
+            <% if room.image.attached? %>
+              <%= image_tag room.image.variant(resize_to_fill: [80, 80]).processed,
+                            class: "img-thumbnail", alt: room.name %>
+            <% else %>
+              <%= image_tag "room/default.png", size: "80x80", class: "img-thumbnail", alt: "No image" %>
+            <% end %>
+          </td>
+
+
+
           <td>
             <%= link_to room.name, room_path(room), class: "text-primary" %>
           </td>

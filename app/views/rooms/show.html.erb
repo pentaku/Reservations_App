@@ -15,30 +15,42 @@
     </div>
   <% end %>
 
+
+
+  <!-- 施設画像と予約フォームを横並びに配置 -->
+<div class="row mt-4">
+  <!-- 左側：施設画像 -->
   <div class="col-md-6">
-  <%= image_tag room.image.attached? ? room.image.display_image : "room/default-image.png", class: "img-fluid" %>
+    <%= image_tag @room.image.attached? ? @room.image.display_image : "room/default.png", class: "img-fluid rounded shadow-sm" %>
   </div>
 
+  <!-- 右側：予約フォーム -->
+  <div class="col-md-6">
+    <h2 class="mb-3">予約する</h2>
+    <%= form_with model: Reservation.new, url: confirm_reservations_path, method: :post, local: true do |f| %>
+      <div class="form-group">
+        <%= f.label :check_in, "チェックイン日" %>
+        <%= f.date_field :check_in, min: Date.today, class: "form-control" %>
+      </div>
 
-<h2 class="top-margin">予約する</h2>
+      <div class="form-group">
+        <%= f.label :check_out, "チェックアウト日" %>
+        <%= f.date_field :check_out, min: Date.tomorrow, class: "form-control" %>
+      </div>
 
-<%= form_with model: Reservation.new, url: confirm_reservations_path, method: :post, local: true do |f| %>
-  <div class="mb-3">
-    <%= f.label :check_in, "チェックイン日" %>
-    <%= f.date_field :check_in, min: Date.today %>
-  </div>
+      <div class="form-group">
+        <%= f.label :guests, "人数" %>
+        <%= f.number_field :guests, min: 1 , class: "form-control" %>
+      </div>
 
-  <div class="mb-3">
-    <%= f.label :check_out, "チェックアウト日" %>
-    <%= f.date_field :check_out, min: Date.tomorrow %>
-  </div>
+    <%= f.hidden_field :room_id, value: @room.id %>
+    <%= f.submit "予約確認ページへ", class: "btn btn-primary" %>
+  <% end %>
 
-  <div class="mb-3">
-    <%= f.label :guests, "人数" %>
-    <%= f.number_field :guests, min: 1 %>
-  </div>
 
-  <%= f.hidden_field :room_id, value: @room.id %>
 
-  <%= f.submit "予約確認ページへ", class: "btn btn-primary" %>
-<% end %>
+
+
+
+
+
