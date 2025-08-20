@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     if @user.save
       log_in @user #ユーザー作成完了したら、ログインさせる。
       flash[:success] = "Welcome !"
-      redirect_to @user #Get "/users/#{@user.id}"
+      redirect_to users_profile_path #Get "/users/#{@user.id}"
     else
       render 'new'
     end
