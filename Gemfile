@@ -6,6 +6,8 @@ ruby '3.1.3'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 # gem 'rails', '~> 6.1.3', '>= 6.1.3.2'
 gem 'rails', '= 6.1.3.2'
+gem 'image_processing',           '1.12.2'
+gem 'mini_magick',                '4.9.5'
 gem 'active_storage_validations', '0.8.2'
 gem 'bcrypt', '~> 3.1.7'
 # Use sqlite3 as the database for Active Record
