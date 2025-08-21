@@ -5,6 +5,7 @@
   <table class="table table-striped align-middle">
     <thead>
       <tr>
+        <th>画像</th>
         <th>施設名</th>
         <th>紹介文</th>
         <th>合計料金</th>
@@ -17,6 +18,10 @@
     <tbody>
       <% @reservations.each do |reservation| %>
         <tr>
+          <td>
+            <%= render 'shared/room_icon', room: reservation.room %>
+          </td>
+
           <td>
             <%= link_to reservation.room.name, room_path(reservation.room), class: "text-primary" %>
           </td>

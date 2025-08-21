@@ -5,6 +5,7 @@
   <table class="table table-striped align-middle">
     <thead>
       <tr>
+        <th>画像</th>
         <th>施設名</th>
         <th>紹介文</th>
         <th>料金</th>
@@ -17,15 +18,8 @@
         <tr>
 
           <td>
-            <% if room.image.attached? %>
-              <%= image_tag room.image.variant(resize_to_fill: [80, 80]).processed,
-                            class: "img-thumbnail", alt: room.name %>
-            <% else %>
-              <%= image_tag "room/default.png", size: "80x80", class: "img-thumbnail", alt: "No image" %>
-            <% end %>
+            <%= render 'shared/room_icon', room: room %>
           </td>
-
-
 
           <td>
             <%= link_to room.name, room_path(room), class: "text-primary" %>

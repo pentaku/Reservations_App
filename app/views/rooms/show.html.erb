@@ -21,7 +21,13 @@
 <div class="row mt-4">
   <!-- 左側：施設画像 -->
   <div class="col-md-6">
-    <%= image_tag @room.image.attached? ? @room.image.display_image : "room/default.png", class: "img-fluid rounded shadow-sm" %>
+    <% if @room.image.attached? %>
+      <%= image_tag @room.image.variant(resize_to_limit: [600, 400]).processed,
+                    class: "img-fluid rounded shadow-sm", alt: @room.name %>
+    <% else %>
+      <%= image_tag "room/default.png",
+                    class: "img-fluid rounded shadow-sm", alt: "No image" %>
+    <% end %>
   </div>
 
   <!-- 右側：予約フォーム -->

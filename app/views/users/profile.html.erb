@@ -18,20 +18,30 @@
           <tr>
             <th scope="row" style="width: 150px;">アイコン画像</th>
             <td>
-              <div class="rounded-circle bg-light d-flex align-items-center justify-content-center"
-                  style="width: 64px; height: 64px; border: 1px solid #ccc;">
-                <i class="fas fa-star fa-lg text-secondary"></i>
-              </div>
+              <% if @user.image.attached? %>
+                <%= image_tag @user.image.variant(resize_to_fill: [64, 64]).processed,
+                      class: "rounded-circle border", alt: @user.name %>
+              <% else %>
+                <%= image_tag "user/default-avatar.png",
+                      class: "rounded-circle border", size: "64x64", alt: "default icon" %>
+              <% end %>
             </td>
           </tr>
+
+
+
+
           <tr>
             <th scope="row">名前</th>
-            <td>te</td>
+            <td><%=@user.name%></td>
           </tr>
           <tr>
             <th scope="row">自己紹介</th>
-            <td></td>
+            <td><%=@user.introduction%></td>
           </tr>
+
+          <tr>
+
         </tbody>
       </table>
       <%= link_to edit_user_path(current_user), class: "btn btn-link" do %>
