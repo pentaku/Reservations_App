@@ -196,3 +196,13 @@ li.list-group-item {
 .form-control-file {
   border: none;
 }
+
+// ==============================
+// 画像サイズ
+// ==============================
+
+.room-icon {
+  width: 80px;
+  height: 80px;
+  object-fit: cover; /* 切り抜きして正方形に見せる */
+}

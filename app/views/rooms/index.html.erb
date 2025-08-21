@@ -27,11 +27,15 @@
     <% @rooms.each do |room| %>
       <div class="col-md-4 mb-4">
         <div class="card shadow-sm h-100">
+
           <% if room.image.attached? %>
-            <%= image_tag room.image.display_image, class: "card-img-top" %>
+            <%= image_tag room.image.variant(resize_to_fill: [400, 250]).processed,
+                          class: "card-img-top", alt: room.name %>
           <% else %>
-            <%= image_tag "room/default.png", class: "card-img-top" %>
+            <%= image_tag "room/default.png",
+                          class: "card-img-top", alt: "No image" %>
           <% end %>
+
 
 
 
