@@ -2,7 +2,7 @@ class ReservationsController < ApplicationController
   before_action :set_reservation, only: [:edit, :update, :destroy]
 
   def index
-    @reservations = Reservation.all
+    @reservations = current_user.reservations.includes(:room)
   end
 
   # 確認ページ
@@ -58,7 +58,7 @@ class ReservationsController < ApplicationController
 
   def destroy
     @reservation.destroy
-    flash[:success] = "Room deleted"
+    flash[:success] = "予約を削除しました！"
     # リクエスト送ったページにリダイレクトする。
     redirect_to request.referrer || root_url
   end
