@@ -1,11 +1,12 @@
 <h2 class="top-margin">予約内容の確認</h2>
 
-<p>施設名: <%= @room.name %></p>
+<p class= "top-margin">施設名: <%= @room.name %></p>
 <p>チェックイン: <%= @reservation.check_in %></p>
 <p>チェックアウト: <%= @reservation.check_out %></p>
 <p>宿泊数: <%= @nights %>泊</p>
 <p>人数: <%= @reservation.guests %></p>
-<p>合計金額: <%= number_to_currency(@total_price, unit: "¥") %></p>
+<p>合計金額: <%= number_to_currency(@total_price, unit: "¥", precision: 0) %></p>
+
 
 <%= form_with model: @reservation, url: reservations_path, method: :post, local: true do |f| %>
   <%= f.hidden_field :check_in %>

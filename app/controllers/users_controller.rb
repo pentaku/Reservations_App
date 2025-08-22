@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       log_in @user #ユーザー作成完了したら、ログインさせる。
-      flash[:success] = "Welcome !"
+      flash[:success] = "新規作成しました"
       redirect_to users_profile_path #Get "/users/#{@user.id}"
     else
       render 'new'
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      flash[:success] = "Profile update"
+      flash[:success] = "プロフィールを編集しました！"
       redirect_to users_profile_path
     else
       render 'edit'
@@ -62,13 +62,14 @@ class UsersController < ApplicationController
 
   # パスワードの更新
   def update_password
+    @user = User.find(params[:id])
     if params[:user][:password].empty?
       @user.errors.add(:password, :blank)
       render 'edit_password'
     elsif @user.update(user_password_params)
       log_in @user
       flash[:success] = "パスワードが更新されました"
-      redirect_to @user
+      redirect_to users_account_path
     else
       render 'edit_password'
     end
@@ -83,7 +84,7 @@ class UsersController < ApplicationController
   end
 
   def user_password_params
-    params.require(:user).permit(:current_password, :password, :password_confirmation)
+    params.require(:user).permit(:email,:current_password, :password, :password_confirmation)
   end
 
   # beforeアクション

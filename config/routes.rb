@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   # どこからでも簡単に参照できるようになります。
   get 'users/:id/edit_password', to: 'users#edit_password', as: 'edit_password_user'
   patch '/update_password', to: 'users#update_password'
+
   resources :users
+
 end
 

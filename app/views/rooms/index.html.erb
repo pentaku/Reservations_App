@@ -4,7 +4,7 @@
   <%= form_with url: rooms_path, method: :get, local: true, class: "row g-3 mb-4 top-margin" do |f| %>
     <div class="col-md-3">
       <%= f.label :area, "エリア検索", class: "form-label" %>
-      <%= f.select :area, ["東京", "大阪", "京都", "札幌"], { include_blank: "選択してください" }, class: "form-select" %>
+      <%= f.text_field :area, value: params[:area], class: "form-control", placeholder: "例: 東京, 京都, 新宿" %>
     </div>
 
     <div class="col-md-5">
@@ -35,9 +35,6 @@
             <%= image_tag "room/default.png",
                           class: "card-img-top", alt: "No image" %>
           <% end %>
-
-
-
 
           <div class="card-body">
             <h5 class="card-title"><%= room.name %></h5>

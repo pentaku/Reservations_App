@@ -30,13 +30,16 @@ class ReservationsController < ApplicationController
     end
 
     @room = @reservation.room
+
+    # 先にバリデーション
+    unless @reservation.valid?
+      flash.now[:danger] = "予約情報を入力してください"
+      render(params[:id].present? ? :edit : "rooms/show", status: :unprocessable_entity) and return
+    end
+
+    # バリデーション通ったあとに計算
     @nights = (@reservation.check_out - @reservation.check_in).to_i
     @total_price = @room.price * @nights * @reservation.guests
-
-    unless @reservation.valid?
-      flash.now[:alert] = @reservation.errors.full_messages.join(", ")
-      render(params[:id].present? ? :edit : "rooms/show", status: :unprocessable_entity)
-    end
   end
 
   def edit

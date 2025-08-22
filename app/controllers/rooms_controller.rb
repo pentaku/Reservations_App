@@ -38,7 +38,7 @@ class RoomsController < ApplicationController
   def destroy
     @room = Room.find(params[:id])
     @room.destroy
-    flash[:success] = "Room deleted"
+    flash[:success] = "削除しました！"
     # リクエスト送ったページにリダイレクトする。
     redirect_to request.referrer || root_url
   end

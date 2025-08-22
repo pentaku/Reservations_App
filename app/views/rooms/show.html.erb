@@ -32,7 +32,12 @@
 
   <!-- 右側：予約フォーム -->
   <div class="col-md-6">
-    <h2 class="mb-3">予約する</h2>
+
+    <h2><%= @room.name %></h2>
+    <p class="text-warning mb-2">★★★★★</p>
+    <p><%= @room.description %></p>
+    <p><strong>宿泊料金:</strong> <%= number_to_currency(@room.price, unit: "¥", format: "%u%n", precision: 0) %> / 日</p>
+
     <%= form_with model: Reservation.new, url: confirm_reservations_path, method: :post, local: true do |f| %>
       <div class="form-group">
         <%= f.label :check_in, "チェックイン日" %>
@@ -49,11 +54,16 @@
         <%= f.number_field :guests, min: 1 , class: "form-control" %>
       </div>
 
-    <%= f.hidden_field :room_id, value: @room.id %>
-    <%= f.submit "予約確認ページへ", class: "btn btn-primary" %>
-  <% end %>
+      <%= f.hidden_field :room_id, value: @room.id %>
+      <%= f.submit "予約確認ページへ", class: "btn btn-primary" %>
 
-
+      <!-- 直前のページに戻るリンク -->
+      <div class="mb-3">
+        <%= link_to "戻る", "javascript:history.back();", class: "btn btn-secondary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
 
 
 
