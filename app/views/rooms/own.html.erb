@@ -1,0 +1,49 @@
+<!-- app/views/rooms/own.html.erb -->
+<div class="container mt-5">
+  <h2 class="mb-4 top-margin">登録済み一覧</h2>
+
+  <table class="table table-striped align-middle">
+    <thead>
+      <tr>
+        <th>画像</th>
+        <th>施設名</th>
+        <th>紹介文</th>
+        <th>料金</th>
+        <th>作成日</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @rooms.each do |room| %>
+        <tr>
+
+          <td>
+            <%= render 'shared/room_icon', room: room %>
+          </td>
+
+          <td>
+            <%= link_to room.name, room_path(room), class: "text-primary" %>
+          </td>
+          <td><%= room.description %></td>
+          <td><%= number_to_currency(room.price, unit: "¥", precision: 0) %>~</td>
+          <td><%= room.created_at.strftime("%Y/%m/%d") %></td>
+          <td class="text-right">
+            <!-- 3点メニュー -->
+            <div class="dropdown">
+              <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenu<%= room.id %>"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v"></i>
+              </button>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu<%= room.id %>">
+                <%= link_to "編集", edit_room_path(room), class: "dropdown-item" %>
+                <%= link_to "施設を削除", room_path(room), method: :delete,
+                            data: { confirm: "本当に削除しますか？" },
+                            class: "dropdown-item text-danger" %>
+              </div>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

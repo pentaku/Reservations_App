@@ -1,0 +1,20 @@
+<h2 class="top-margin">予約内容の確認</h2>
+
+<p class= "top-margin">施設名: <%= @room.name %></p>
+<p>チェックイン: <%= @reservation.check_in %></p>
+<p>チェックアウト: <%= @reservation.check_out %></p>
+<p>宿泊数: <%= @nights %>泊</p>
+<p>人数: <%= @reservation.guests %></p>
+<p>合計金額: <%= number_to_currency(@total_price, unit: "¥", precision: 0) %></p>
+
+
+<%= form_with model: @reservation, url: reservations_path, method: :post, local: true do |f| %>
+  <%= f.hidden_field :check_in %>
+  <%= f.hidden_field :check_out %>
+  <%= f.hidden_field :guests %>
+  <%= f.hidden_field :room_id %>
+
+  <%= f.submit "予約を確定する", class: "btn btn-success" %>
+<% end %>
+
+<%= link_to "戻る", request.referer || root_path, class: "btn btn-secondary" %>

@@ -1,0 +1,72 @@
+  <!-- 検索フォーム -->
+  <%= form_with url: rooms_path, method: :get, local: true, class: "row g-3 mb-4 top-margin" do |f| %>
+    <div class="col-md-3">
+      <%= f.label :area, "エリア検索", class: "form-label" %>
+      <%= f.select :area, ["東京", "大阪", "京都", "札幌"], { include_blank: "選択してください" }, class: "form-select" %>
+    </div>
+
+    <div class="col-md-5">
+      <%= f.label :keyword, "フリーワード検索", class: "form-label" %>
+      <%= f.text_field :keyword, value: params[:keyword], class: "form-control", placeholder: "施設名・詳細を検索" %>
+    </div>
+
+    <div class="col-md-2 d-flex align-items-end">
+      <%= f.submit "検索", class: "btn btn-primary w-100" %>
+    </div>
+  <% end %>
+
+
+
+  <!-- 施設画像と予約フォームを横並びに配置 -->
+<div class="row mt-4">
+  <!-- 左側：施設画像 -->
+  <div class="col-md-6">
+    <% if @room.image.attached? %>
+      <%= image_tag @room.image.variant(resize_to_limit: [600, 400]).processed,
+                    class: "img-fluid rounded shadow-sm", alt: @room.name %>
+    <% else %>
+      <%= image_tag "room/default.png",
+                    class: "img-fluid rounded shadow-sm", alt: "No image" %>
+    <% end %>
+  </div>
+
+  <!-- 右側：予約フォーム -->
+  <div class="col-md-6">
+
+    <h2><%= @room.name %></h2>
+    <p class="text-warning mb-2">★★★★★</p>
+    <p><%= @room.description %></p>
+    <p><strong>宿泊料金:</strong> <%= number_to_currency(@room.price, unit: "¥", format: "%u%n", precision: 0) %> / 日</p>
+
+    <%= form_with model: Reservation.new, url: confirm_reservations_path, method: :post, local: true do |f| %>
+      <div class="form-group">
+        <%= f.label :check_in, "チェックイン日" %>
+        <%= f.date_field :check_in, min: Date.today, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :check_out, "チェックアウト日" %>
+        <%= f.date_field :check_out, min: Date.tomorrow, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :guests, "人数" %>
+        <%= f.number_field :guests, min: 1 , class: "form-control" %>
+      </div>
+
+      <%= f.hidden_field :room_id, value: @room.id %>
+      <%= f.submit "予約確認ページへ", class: "btn btn-primary" %>
+
+      <!-- 直前のページに戻るリンク -->
+      <div class="mb-3">
+        <%= link_to "戻る", "javascript:history.back();", class: "btn btn-secondary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+
+
+
+

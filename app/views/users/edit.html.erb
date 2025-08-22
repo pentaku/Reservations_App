@@ -1,0 +1,25 @@
+<% provide(:title, "Edit user") %>
+<h1 class="top-margin">プロフィール</h1>
+
+<div class="row">
+  <div class="col-md-6 mx-auto">
+    <%= form_with(model: @user, local: true) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :name, "名前" %>
+      <%= f.text_field :name, class: 'form-control' %>
+
+      <%= f.label :introduction, "自己紹介" %>
+      <%= f.text_area :introduction, class: "form-control", rows: 5 %>
+
+      <%= f.label :image, "画像" %>
+      <%= f.file_field :image, class: 'form-control-file', accept: "image/jpeg,image/gif,image/png" %>
+
+      <%= f.submit "保存", class: "btn btn-primary" %>
+
+      <!-- キャンセルボタンの追加 -->
+      <%= link_to 'キャンセル', users_profile_path, class: 'btn btn-outline-secondary ml-2' %>
+
+    <% end %>
+  </div>
+</div>

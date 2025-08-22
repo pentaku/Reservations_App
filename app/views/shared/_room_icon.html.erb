@@ -1,0 +1,10 @@
+<% size = 80 %>
+
+<% if room.image.attached? %>
+  <%= image_tag room.image.variant(resize_to_fill: [size, size]).processed,
+                class: "img-thumbnail room-icon", alt: room.name %>
+<% else %>
+  <%= image_tag "room/default.png",
+                class: "img-thumbnail room-icon", alt: "No image" %>
+<% end %>
+

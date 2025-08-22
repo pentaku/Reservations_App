@@ -1,0 +1,56 @@
+<% provide(:title, "Profile") %>
+
+
+<div class="container-fluid mt-4">
+  <div class="row">
+    <!-- サイドメニュー -->
+    <div class="col-md-3 top-margin">
+      <ul class="list-group">
+        <li class="list-group-item">
+          <%= link_to 'アカウント', users_account_path, class: "sideList-item" %>
+        </li>
+        <li class="list-group-item active">プロフィール</li>
+      </ul>
+    </div>
+
+    <!-- メインコンテンツ -->
+    <div class="col-md-9 top-margin">
+      <h4 class="mb-4">プロフィール</h4>
+      <table class="table table-borderless align-middle">
+        <tbody>
+          <tr>
+            <th scope="row" style="width: 150px;">アイコン画像</th>
+            <td>
+              <% if @user.image.attached? %>
+                <%= image_tag @user.image.variant(resize_to_fill: [64, 64]).processed,
+                      class: "rounded-circle border", alt: @user.name %>
+              <% else %>
+                <%= image_tag "user/default-avatar.png",
+                      class: "rounded-circle border", size: "64x64", alt: "default icon" %>
+              <% end %>
+            </td>
+          </tr>
+
+
+
+
+          <tr>
+            <th scope="row">名前</th>
+            <td><%=@user.name%></td>
+          </tr>
+          <tr>
+            <th scope="row">自己紹介</th>
+            <td><%=@user.introduction%></td>
+          </tr>
+
+          <tr>
+
+        </tbody>
+      </table>
+      <%= link_to edit_user_path(current_user), class: "btn btn-link" do %>
+        <i class="fas fa-edit"></i> 編集
+      <% end %>
+
+    </div>
+  </div>
+</div>

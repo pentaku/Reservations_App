@@ -1,0 +1,40 @@
+<% provide(:title, "Edit room") %>
+<h1 class= "top-margin">施設情報を編集</h1>
+
+<div class="row">
+  <div class="col-md-8 mx-auto">
+    <%= form_with(model: @room, local: true) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <div class="form-group">
+        <%= f.label :name, "施設名" %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :description, "紹介文" %>
+        <%= f.text_area :description, class: 'form-control', rows: 4 %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :price, "宿泊料金 (/日)" %>
+        <%= f.number_field :price, class: 'form-control', step: 1000 %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :address, "住所" %>
+        <%= f.text_field :address, class: 'form-control' %>
+      </div>
+
+      <%= f.label :image, "画像" %>
+      <%= f.file_field :image, class: 'form-control-file', accept: "image/jpeg,image/gif,image/png" %>
+
+
+
+      <div class="form-group mt-3">
+        <%= f.submit "保存する", class: "btn btn-primary" %>
+        <%= link_to 'キャンセル', own_room_path, class: 'btn btn-outline-secondary ml-2' %>
+      </div>
+    <% end %>
+  </div>
+</div>

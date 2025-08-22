@@ -1,0 +1,28 @@
+<% provide(:title, 'Sign up') %>
+<h1 class = "top-margin">新規施設登録</h1>
+
+<div class="row">
+  <div class="col-md-6 mx-auto">
+    <%= form_with(model: @room, local: true) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :name, "施設名" %>
+      <%= f.text_field :name, class: 'form-control' %>
+
+      <%= f.label :description, "施設詳細" %>
+      <%= f.text_area :description, class: 'form-control', rows: 5 %>
+
+      <%= f.label :price, "料金" %>
+      <%= f.number_field :price, class: 'form-control', min: 0 %>
+
+
+      <%= f.label :address, "住所" %>
+      <%= f.text_field :address, class: 'form-control' %>
+
+      <%= f.label :image, "画像" %>
+      <%= f.file_field :image, class: 'form-control-file', accept: "image/jpeg,image/gif,image/png" %>
+
+      <%= f.submit "施設登録する", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

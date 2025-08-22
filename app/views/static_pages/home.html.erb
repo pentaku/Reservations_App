@@ -1,0 +1,31 @@
+<% provide(:title, '') %>
+
+<div class="center jumbotron top-margin">
+<% provide(:title, '') %>
+
+
+
+  <!-- 検索フォーム -->
+  <%= form_with url: rooms_path, method: :get, local: true, class: "row g-3 mb-4" do |f| %>
+    <div class="col-md-3">
+      <%= f.label :area, "エリア検索", class: "form-label" %>
+      <%= f.select :area, ["東京", "大阪", "京都", "札幌"], { include_blank: "選択してください" }, class: "form-select" %>
+    </div>
+
+    <div class="col-md-5">
+      <%= f.label :keyword, "フリーワード検索", class: "form-label" %>
+      <%= f.text_field :keyword, value: params[:keyword], class: "form-control", placeholder: "施設名・詳細を検索" %>
+    </div>
+
+    <div class="col-md-2 d-flex align-items-end">
+      <%= f.submit "検索", class: "btn btn-primary w-100" %>
+    </div>
+  <% end %>
+
+  <h1>
+    Potepan Shareで<br>
+    まだ体験したことのない<br>
+    旅をしよう
+  </h1>
+</div>
+
